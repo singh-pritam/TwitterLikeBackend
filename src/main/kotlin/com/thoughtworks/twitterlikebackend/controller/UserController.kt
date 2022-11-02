@@ -17,4 +17,7 @@ class UserController(private val userService: UserService) {
 
     @PostMapping("/createUser")
     fun createUser(@RequestBody user: User) = ResponseEntity.ok(userService.createNewUser(user))
+
+    @GetMapping("/all")
+    fun getAllUsers() = userService.getUsers();
 }
