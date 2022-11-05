@@ -1,20 +1,23 @@
 package com.thoughtworks.twitterlikebackend.model
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "users")
 class User(
-        val name: String,
+        var name: String,
         @Column(name = "user_name", unique = true)
-        val userName: String,
+        var userName: String,
         val email: String,
+        var password: String,
+        var birthday: String? = null,
+        var gender: String? = null,
+        var bio : String? = null,
+        var Location: String? = null,
+        var Website: String? = null,
+        @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+        var tweetList: MutableList<Tweet>? = null,
         @Id
-        //@GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long? = 0
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long?
 )
