@@ -1,5 +1,8 @@
 package com.thoughtworks.twitterlikebackend.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 
 @Entity
@@ -15,7 +18,8 @@ class User(
         var bio : String? = null,
         var Location: String? = null,
         var Website: String? = null,
-        @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+        @JsonBackReference
+        @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
         var tweetList: MutableList<Tweet>? = null,
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
