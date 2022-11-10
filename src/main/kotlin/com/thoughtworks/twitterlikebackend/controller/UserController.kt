@@ -1,6 +1,6 @@
 package com.thoughtworks.twitterlikebackend.controller
 
-import com.thoughtworks.twitterlikebackend.model.User
+import com.thoughtworks.twitterlikebackend.entity.User
 import com.thoughtworks.twitterlikebackend.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -17,10 +17,10 @@ class UserController(private val userService: UserService) {
     fun getUser(@PathVariable userId: Long) = ResponseEntity.ok(userService.getUserById(userId))
 
     @PostMapping("/createUser")
-    fun createUser(@RequestBody user: User) = ResponseEntity.ok(userService.createNewUser(user))
+    fun createUser(@RequestBody user: User) = userService.createNewUser(user)
 
     @GetMapping("/all")
-    fun getAllUsers() = userService.getUsers();
+    fun getAllUsers() = ResponseEntity.ok(userService.getUsers())
 
     @DeleteMapping("/deleteUser/{userId}")
     fun deleteUser(@PathVariable userId: Long) = userService.removeUser(userId)

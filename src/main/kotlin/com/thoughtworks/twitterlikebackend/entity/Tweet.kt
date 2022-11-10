@@ -1,7 +1,6 @@
-package com.thoughtworks.twitterlikebackend.model
+package com.thoughtworks.twitterlikebackend.entity
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 

@@ -1,12 +1,11 @@
 package com.thoughtworks.twitterlikebackend.controller
 
-import com.thoughtworks.twitterlikebackend.model.Tweet
+import com.thoughtworks.twitterlikebackend.entity.Tweet
 import com.thoughtworks.twitterlikebackend.service.TweetService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -20,4 +19,6 @@ class TweetController(private val tweetService: TweetService) {
     @GetMapping("{userName}/tweets")
     fun getAllTweetsOfAUser(@PathVariable userName: String) = tweetService.getAllTweetsByUserName(userName);
 
+    @GetMapping("tweets/all")
+    fun getAllTweets() = tweetService.getAllTweets();
 }
