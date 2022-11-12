@@ -11,7 +11,7 @@ import kotlin.Exception
 class UserService(private val userRepository: UserRepository) {
     fun getUserById(userId: Long): Any {
         if(userRepository.existsById(userId))
-          return userRepository.findById(userId)
+          return userRepository.findUserById(userId)
         else
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist")
     }
@@ -27,6 +27,13 @@ class UserService(private val userRepository: UserRepository) {
     fun removeUser(userId: Long) {
         if(userRepository.existsById(userId))
             return userRepository.deleteById(userId);
+        else
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist")
+    }
+
+    fun getUserByUserName(userName: String): User {
+        if(userRepository.findByUserName(userName) != null)
+            return userRepository.findByUserName(userName)!!
         else
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist")
     }

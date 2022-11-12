@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TweetRepository: JpaRepository<Tweet, Long> {
     @Query("SELECT tweet.id,tweet.text FROM Tweet tweet  WHERE tweet.user = :user")
-    fun findTweetByUser(@Param("user") user: User) : List<Object>?
+    fun findTweetByUser(@Param("user") user: User?) : List<Object>?
 
     @Query("SELECT tweet.id, tweet.text FROM Tweet tweet")
     fun findAllTweets(): List<Object>

@@ -7,28 +7,40 @@ import javax.persistence.*
 @Table(name = "users")
 class User(
         @Column(name = "name")
-        var name: String,
+        val name: String,
         @Column(name = "user_name", unique = true)
-        var userName: String,
+        val userName: String,
         @Column(name = "email", unique = true)
         val email: String,
         @Column(name = "password")
-        var password: String,
+        val password: String,
         @Column(name = "birthday")
-        var birthday: String? = null,
+        val birthday: String? = null,
         @Column(name = "gender")
-        var gender: String? = null,
+        val gender: String? = null,
         @Column(name = "bio")
-        var bio : String? = null,
+        val bio : String? = null,
         @Column(name = "location")
-        var location: String? = null,
+        val location: String? = null,
         @Column(name = "website")
-        var website: String? = null,
+        val website: String? = null,
         @JsonBackReference
         @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-        var tweetList: MutableList<Tweet>? = null,
+        val tweetList: MutableList<Tweet>? = null,
+        @ManyToMany(cascade = [CascadeType.ALL])
+        @JoinTable(name = "users_relations",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "follower_id")])
+        val followers: Set<User>? = null,
+        @ManyToMany(mappedBy = "followers")
+        val following: Set<User>?=null,
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         val id: Long?=null
-)
+) {
+    fun compare(password: String): Boolean {
+            return password == this.password
+
+    }
+}

@@ -25,6 +25,7 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("io.mockk:mockk:1.12.4")
 	testImplementation("com.ninja-squad:springmockk:3.1.1")
